@@ -6,17 +6,16 @@ on:
   workflow_dispatch:
 
 env:
-  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.parallel=false -Dkotlin.incremental=false
-  GRADLE_USER_HOME_DIR: .gradle
+  GRADLE_OPTS: -Dorg.gradle.daemon=false -Dorg.gradle.parallel=false
 
 jobs:
-  build:
+  build-debug:
     name: Build Debug APK
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 25
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
@@ -25,27 +24,15 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          cache-read-only: true
-
-      - name: Build with Gradle (no cache)
+      - name: Build Debug APK
         run: |
-          ./gradlew assembleDebug \
-            --no-daemon \
-            --stacktrace \
-            --info \
-            --offline \
-            --build-cache \
-            --configuration-cache
-        env:
-          GRADLE_USER_HOME_DIR: .gradle
+          chmod +x gradlew
+          ./gradlew assembleDebug --stacktrace --info
 
-      - name: Upload APK
+      - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: app-debug-apk
+          name: app-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
           if-no-files-found: error
@@ -53,10 +40,10 @@ jobs:
   build-release:
     name: Build Release APK
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 25
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
@@ -65,27 +52,15 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          cache-read-only: true
-
-      - name: Build with Gradle (no cache)
+      - name: Build Release APK
         run: |
-          ./gradlew assembleRelease \
-            --no-daemon \
-            --stacktrace \
-            --info \
-            --offline \
-            --build-cache \
-            --configuration-cache
-        env:
-          GRADLE_USER_HOME_DIR: .gradle
+          chmod +x gradlew
+          ./gradlew assembleRelease --stacktrace --info
 
-      - name: Upload APK
+      - name: Upload Release APK
         uses: actions/upload-artifact@v4
         with:
-          name: app-release-apk
+          name: app-release
           path: app/build/outputs/apk/release/app-release-unsigned.apk
           retention-days: 30
           if-no-files-found: warn
