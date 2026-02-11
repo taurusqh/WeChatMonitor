@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">微信监听助手</string>
+    <string name="accessibility_service_description">监听指定微信群的消息，分析重要消息并提醒</string>
+
+    <!-- 导航标签 -->
+    <string name="nav_messages">消息</string>
+    <string name="nav_important">重要</string>
+    <string name="nav_settings">设置</string>
+
+    <!-- 设置 -->
+    <string name="settings_monitored_groups">监听的群组</string>
+    <string name="settings_add_group">添加群组</string>
+    <string name="settings_keywords">关键词设置</string>
+    <string name="settings_keywords_hint">关键词（支持正则表达式）</string>
+    <string name="settings_analysis_mode">分析模式</string>
+    <string name="settings_glm_api">智谱AI API设置</string>
+    <string name="settings_glm_api_key">API Key</string>
+    <string name="settings_daily_summary">每日摘要</string>
+    <string name="settings_summary_time">发送时间</string>
+    <string name="settings_sender_filter">发送者过滤</string>
+
+    <!-- 分析模式 -->
+    <string name="mode_keyword_only">仅关键词</string>
+    <string name="mode_glm_only">仅AI分析</string>
+    <string name="mode_both">关键词+AI</string>
+
+    <!-- 过滤模式 -->
+    <string name="filter_mode_none">不过滤</string>
+    <string name="filter_mode_whitelist">白名单</string>
+    <string name="filter_mode_blacklist">黑名单</string>
+
+    <!-- 通知 -->
+    <string name="notification_channel_name">重要消息提醒</string>
+    <string name="notification_channel_desc">微信群重要消息通知</string>
+    <string name="notification_important_message">重要消息</string>
+    <string name="notification_daily_summary">每日消息摘要</string>
+    <string name="notification_share">分享</string>
+
+    <!-- 提示 -->
+    <string name="tip_enable_accessibility">请在设置中开启无障碍服务</string>
+    <string name="tip_enable_notification">请允许通知权限</string>
+    <string name="tip_add_group_hint">输入要监听的微信群名称</string>
+    <string name="tip_no_messages">暂无消息</string>
+    <string name="tip_service_running">服务运行中</string>
+    <string name="tip_service_stopped">服务未启动</string>
+</resources>
