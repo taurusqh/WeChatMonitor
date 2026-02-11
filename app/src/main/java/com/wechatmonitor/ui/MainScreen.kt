@@ -1,12 +1,16 @@
 package com.wechatmonitor.ui
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.wechatmonitor.model.ChatMessage
 import com.wechatmonitor.model.MonitorSettings
@@ -132,7 +136,7 @@ fun MessageListScreen(
                 ) {
                     Column(
                         modifier = Modifier.padding(24.dp),
-                        horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Icon(
                             Icons.Default.ChatBubbleOutline,
@@ -185,7 +189,7 @@ fun ImportantMessagesScreen(
                 ) {
                     Column(
                         modifier = Modifier.padding(24.dp),
-                        horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Icon(
                             Icons.Default.StarOutline,
@@ -237,7 +241,7 @@ fun SettingsScreen(
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         Column {
                             Text(
@@ -314,7 +318,7 @@ fun SettingsScreen(
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text("启用每日摘要")
                         Switch(
@@ -335,12 +339,12 @@ fun SettingsScreen(
     // 添加群组对话框
     if (showAddGroupDialog) {
         AddGroupDialog(
-                            onDismiss = { showAddGroupDialog = false },
-                            onConfirm = { groupName ->
-                                onAddGroup(groupName)
-                                showAddGroupDialog = false
-                            }
-                        )
+            onDismiss = { showAddGroupDialog = false },
+            onConfirm = { groupName ->
+                onAddGroup(groupName)
+                showAddGroupDialog = false
+            }
+        )
     }
 }
 
@@ -389,7 +393,7 @@ fun MessageCard(message: ChatMessage) {
             if (message.isImportant) {
                 Spacer(modifier = Modifier.height(8.dp))
                 Row(
-                    verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
                         Icons.Default.Star,
@@ -426,7 +430,7 @@ fun ImportantMessageCard(message: ChatMessage) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Row(
-                    verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Icon(
                         Icons.Default.Star,
@@ -470,7 +474,7 @@ fun GroupItem(groupName: String, onRemove: () -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = androidx.compose.ui.Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Text(groupName, style = MaterialTheme.typography.bodyMedium)
         IconButton(onClick = onRemove) {
@@ -550,12 +554,3 @@ private fun formatTime(timestamp: Long): String {
     val sdf = SimpleDateFormat("HH:mm", Locale.getDefault())
     return sdf.format(Date(timestamp))
 }
-
-// 导入必要的 Compose 组件
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.automirrored.filled.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.unit.dp
