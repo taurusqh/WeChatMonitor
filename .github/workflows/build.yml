@@ -21,17 +21,23 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Grant execute permission
-        run: chmod +x gradlew
+      - name: Build with Gradle (direct)
+        run: |
+          # Use Gradle directly without wrapper
+          export GRADLE_HOME=$HOME/.gradle
+          cd app
+          curl -sL https://services.gradle.org/distributions/gradle-8.2-bin.zip -o gradle.zip
+          unzip -q gradle.zip
+          rm gradle.zip
+          chmod +x gradle/bin/gradle
 
-      - name: Build Debug APK
-        run: ./gradlew assembleDebug --stacktrace --info
-        continue-on-error: false
+          # Build debug APK
+          ./gradle/gradle assembleDebug --stacktrace --info
 
-      - name: Check build output
-        run: ls -la app/build/outputs/apk/debug/
+          # List output
+          ls -la build/outputs/apk/debug/
 
-      - name: Upload APK
+      - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
           name: app-debug
@@ -54,9 +60,21 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build Release APK
-        run: ./gradlew assembleRelease --stacktrace --info
-        continue-on-error: false
+      - name: Build with Gradle (direct)
+        run: |
+          # Use Gradle directly without wrapper
+          export GRADLE_HOME=$HOME/.gradle
+          cd app
+          curl -sL https://services.gradle.org/distributions/gradle-8.2-bin.zip -o gradle.zip
+          unzip -q gradle.zip
+          rm gradle.zip
+          chmod +x gradle/bin/gradle
+
+          # Build release APK
+          ./gradle/gradle assembleRelease --stacktrace --info
+
+          # List output
+          ls -la build/outputs/apk/release/
 
       - name: Upload Release APK
         uses: actions/upload-artifact@v4
